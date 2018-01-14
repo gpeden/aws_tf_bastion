@@ -12,3 +12,25 @@ resource "aws_vpc" "vpc" {
     Name = "georgep-challenge-vpc"
   }
 }
+
+# subnet public
+
+resource "aws_subnet" "subnet-public" {
+  vpc_id     = "${aws_vpc.vpc.id}"
+  cidr_block = "10.0.1.0/24"
+
+  tags {
+    Name = "georgep-challenge-subnet-public"
+  }
+}
+
+# subnet private
+
+resource "aws_subnet" "subnet-private" {
+  vpc_id     = "${aws_vpc.vpc.id}"
+  cidr_block = "10.0.2.0/24"
+
+  tags {
+    Name = "georgep-challenge-subnet-private"
+  }
+}
