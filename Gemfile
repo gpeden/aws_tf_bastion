@@ -1,0 +1,9 @@
+source 'https://rubygems.org'
+gem 'rake'
+gem 'deckrb'
+gem 'awspec','0.85.1'
+gem 'awsecrets'
+gem 'kitchen-terraform'
+gem 'test-kitchen'
+gem 'kitchen-verifier-awspec'
+gem "kitchen-vagrant"
