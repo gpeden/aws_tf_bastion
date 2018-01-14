@@ -44,6 +44,18 @@ describe ec2('georgep-challenge-ec2-bastion') do
   its(:instance_type) { should eq 't2.micro' }
   it { should have_tag('Name').value('georgep-challenge-ec2-bastion') }
   it { should belong_to_vpc('georgep-challenge-vpc') }
+  it { should have_security_group('georgep-challenge-sg-bastion') }
+  it { should belong_to_subnet('georgep-challenge-subnet-public') }
+end
+
+# private ec2 instance
+describe ec2('georgep-challenge-ec2-private') do
+  it { should exist }
+  it { should be_running }
+  its(:image_id) { should eq 'ami-5e02b523' }
+  its(:instance_type) { should eq 't2.micro' }
+  it { should have_tag('Name').value('georgep-challenge-ec2-private') }
+  it { should belong_to_vpc('georgep-challenge-vpc') }
   it { should have_security_group('georgep-challenge-sg-private') }
   it { should belong_to_subnet('georgep-challenge-subnet-private') }
 end
