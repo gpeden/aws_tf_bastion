@@ -40,7 +40,7 @@ resource "aws_route_table" "georgep-challenge-route-public" {
     }
 
     tags {
-        Name = "Public Subnet"
+        Name = "georgep-challenge-route-public"
     }
 }
 

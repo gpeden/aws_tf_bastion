@@ -22,7 +22,7 @@ describe subnet('georgep-challenge-subnet-private') do
   its(:cidr_block) { should eq '10.0.2.0/24' }
 end
 
-describe route_table('georgep-challenge-route-table') do
+describe route_table('georgep-challenge-route-public') do
   it { should exist }
   it { should have_route('0.0.0.0/0').target(gateway: 'georgep-challenge-igw') }
 end
@@ -48,16 +48,7 @@ describe ec2('georgep-challenge-ec2-bastion') do
   it { should belong_to_subnet('georgep-challenge-subnet-private') }
 end
 
-# private security group
-
-# subnets
-
-# internet gateway
-
-# ec2 bastion
-
-# ec2 private
-
-# bastion to private route
-
 # NAT gateway
+describe nat_gateway('georgep-challenge-nat') do
+  it { should exist }
+end
