@@ -14,7 +14,6 @@ resource "aws_vpc" "vpc" {
 }
 
 # subnet public
-
 resource "aws_subnet" "subnet-public" {
   vpc_id     = "${aws_vpc.vpc.id}"
   cidr_block = "10.0.1.0/24"
@@ -25,7 +24,6 @@ resource "aws_subnet" "subnet-public" {
 }
 
 # subnet private
-
 resource "aws_subnet" "subnet-private" {
   vpc_id     = "${aws_vpc.vpc.id}"
   cidr_block = "10.0.2.0/24"
@@ -34,3 +32,23 @@ resource "aws_subnet" "subnet-private" {
     Name = "georgep-challenge-subnet-private"
   }
 }
+
+# security group public
+resource "aws_security_group" "georgep-challenge-sg-bastion" {
+  name = "georgep-challenge-sg-bastion"
+
+  tags {
+    Name = "georgep-challenge-sg-bastion"
+  }
+
+  ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  vpc_id = "${aws_vpc.vpc.id}"
+
+}
+# security group private
