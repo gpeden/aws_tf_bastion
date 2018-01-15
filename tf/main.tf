@@ -95,7 +95,7 @@ resource "aws_instance" "georgep-challenge-ec2-bastion" {
 
   security_groups = ["${aws_security_group.georgep-challenge-sg-bastion.id}"]
   subnet_id = "${aws_subnet.georgep-challenge-subnet-public.id}"
-  key_name = "georgep-challenge-key"
+  key_name = "georgep-challenge-ssh-key"
   associate_public_ip_address = true
 }
 
@@ -167,7 +167,7 @@ resource "aws_instance" "georgep-challenge-ec2-private" {
 
   security_groups = ["${aws_security_group.georgep-challenge-sg-private.id}"]
   subnet_id = "${aws_subnet.georgep-challenge-subnet-private.id}"
-  key_name = "georgep-challenge-key"
+  key_name = "georgep-challenge-ssh-key"
 }
 
 output "private" {
@@ -206,4 +206,9 @@ resource "aws_route_table" "georgep-challenge-route-private" {
 resource "aws_route_table_association" "georgep-challenge-route-private" {
     subnet_id = "${aws_subnet.georgep-challenge-subnet-private.id}"
     route_table_id = "${aws_route_table.georgep-challenge-route-private.id}"
+}
+
+resource "aws_key_pair" "georgep-challenge-ssh-key" {
+  key_name   = "georgep-challenge-ssh-key"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDvvvqxuLT5d3ixFf8bbH280Bx9J3MsmpkxvmjUt2bm3rPcGQvJwHzAQUpTFuFQ3f5pqmSYUM4gF+8gRvNiK0pKvetE7o51dA0x0HxmHcoBXbZP5kKKNT6A+jUPreq6JNuoj+EgBceAWPzZaEQHYZ5kBHVLhZP4DHK5e4m9pxcT4LEXobGXm5TlhoOV9GyfV7g0J24SFg1bKbn1g5FcgGDObigDuyoHYxAjngS7tO3rk88MkGkJwM/jwC4w6+zpMmJ1uSoGDTvGSHwpp+0THZtDf3yypOrcBDvPbeCEr+sQIj72f9DWDvFkEZ+4by/cMvyGaiGhJ3PwWa3oifmMaWd4pq3aUkkUWhdIXjKzO+K2V50H7dtsL527CRDOmG8zWT3mRi2ELv3cU6TZ8PsyuywZXCopnPo4fCiCX8K0DKSgXSEAcpqEWUKQWwOjbd9AFekLvBdtwJrPZgjF1QMuj1NbKPpnqaVMc9eEyFTd6TzAIs/DjiRs+adwXKQWEdYjaXCq4CrqEiBfPHwsWlvIGU52lZEg2psU/vjbPqRkARVuAmdT20Xbn2W1BhIF1F85uVD/VzS47fGhI2HdrZYllw2j7z/Rdgnf9LcvGrzfZoPyXX7p+UvEAYL7MHO1t5/Gy2xOCNY0WPxB/2Ttz+XkQaxtBaOKEyTc3zbuA1C0NqDBmw== georgep@slalom.com"
 }
